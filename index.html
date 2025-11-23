@@ -42,7 +42,8 @@
             <nav class="hidden md:flex space-x-4">
                 <a href="#domov" class="hover:bg-blue-600 px-3 py-2 rounded-lg transition duration-150">Domov</a>
                 <a href="#o-nas" class="hover:bg-blue-600 px-3 py-2 rounded-lg transition duration-150">O Nás</a>
-                <a href="#api-info" class="bg-blue-700 px-3 py-2 rounded-lg transition duration-150 font-bold">API</a>
+                <!-- API odkaz teraz vedie na login gate -->
+                <a href="javascript:scrollToLogin()" class="bg-blue-700 px-3 py-2 rounded-lg transition duration-150 font-bold">API</a>
                 <a href="#kontakt" class="hover:bg-blue-600 px-3 py-2 rounded-lg transition duration-150">Kontakt</a>
             </nav>
 
@@ -69,8 +70,42 @@
             </div>
         </section>
 
+        <!-- NOVÝ BLOK: Prihlasovacia brána (Login Gate) -->
+        <section id="login-gate" class="webnode-block bg-gray-200 shadow-inner min-h-[40vh] flex items-center justify-center">
+            <div class="max-w-md w-full mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">
+                    Prihlásenie k API Informáciám
+                </h2>
+                <div class="bg-white p-8 rounded-xl shadow-2xl border-t-4 border-blue-500">
+                    <p class="text-gray-600 mb-6">
+                        Pre zobrazenie API kľúča zadajte svoj osobný PIN a overovací kód.
+                    </p>
+                    
+                    <!-- ZMENENÉ: Odstránené kódy z placeholderov -->
+                    <input type="password" id="pinInput" placeholder="Zadajte PIN" maxlength="4" class="w-full mb-4 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-center text-lg font-mono" />
+                    <input type="password" id="codeInput" placeholder="Zadajte Overovací Kód" maxlength="7" class="w-full mb-6 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-center text-lg font-mono" />
+
+                    <button onclick="attemptLogin()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-300 shadow-md">
+                        Odomknúť Prístup
+                    </button>
+                    
+                    <!-- Miesto pre chybové hlásenie -->
+                    <div id="errorMessage" class="mt-4 text-sm font-medium text-red-600 opacity-0 transition-opacity duration-300">
+                        <!-- Chyba sa zobrazí tu -->
+                    </div>
+
+                    <p class="mt-6 text-xs text-gray-400">
+                        <!-- BEZPEČNOSTNÉ UPOZORNENIE PRE VÝVOJÁRA: Tento login je len ukážka. Pre seriózne zabezpečenie je nutné overovanie na strane servera. -->
+                        Prihlasovací mechanizmus slúži len ako vizuálna brána.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
         <!-- Blok 3: Sekcia s API Kľúčom/ID (Tmavé pozadie/Blok s informáciami) -->
-        <section id="api-info" class="webnode-block bg-gray-100 shadow-inner">
+        <!-- ŠTART: Pôvodná API sekcia je TERAZ štandardne SKRYTÁ -->
+        <section id="api-info" class="webnode-block bg-gray-100 shadow-inner hidden">
             <div class="max-w-4xl mx-auto px-4">
                 <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
                     Verejné Informácie a ID
@@ -109,6 +144,7 @@
                 </div>
             </div>
         </section>
+        <!-- KONIEC: Skrytá API sekcia -->
 
         <!-- Blok 4: O Nás/Ďalšie info (Biele pozadie) -->
         <section id="o-nas" class="webnode-block content-bg shadow-md">
@@ -133,7 +169,41 @@
     </footer>
 
     <script>
-        // Funkcia na kopírovanie textu do schránky
+        // --- Prihlasovacia logika ---
+        // Bezpečnostné upozornenie: Tieto hodnoty sú viditeľné v zdrojovom kóde!
+        const CORRECT_PIN = "4720";
+        const CORRECT_CODE = "1022125";
+        
+        const loginGate = document.getElementById('login-gate');
+        const apiInfo = document.getElementById('api-info');
+        const pinInput = document.getElementById('pinInput');
+        const codeInput = document.getElementById('codeInput');
+        const errorMessage = document.getElementById('errorMessage');
+
+        function attemptLogin() {
+            const enteredPin = pinInput.value.trim();
+            const enteredCode = codeInput.value.trim();
+            
+            errorMessage.classList.remove('opacity-100');
+            errorMessage.classList.add('opacity-0');
+
+            if (enteredPin === CORRECT_PIN && enteredCode === CORRECT_CODE) {
+                // Úspešné prihlásenie
+                loginGate.classList.add('hidden');
+                apiInfo.classList.remove('hidden');
+            } else {
+                // Neúspešné prihlásenie
+                errorMessage.textContent = "Chybný PIN alebo overovací kód. Skúste to znova.";
+                errorMessage.classList.remove('opacity-0');
+                errorMessage.classList.add('opacity-100');
+            }
+        }
+
+        function scrollToLogin() {
+            document.getElementById('login-gate').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Funkcia na kopírovanie textu do schránky ---
         function copyToClipboard() {
             const copyText = document.getElementById("apiKeyDisplay").textContent;
             
