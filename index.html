@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moja Stránka - Vytvorená v Editore</title>
+    <!-- Načítanie Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f4f5; /* Svetlé pozadie, typické pre jednoduché weby */
+        }
+        /* Custom štýl pre simuláciu blokov z editora */
+        .webnode-block {
+            padding: 4rem 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .header-bg {
+            background-color: #3b82f6; /* Modrá farba, často používaná ako primárna */
+        }
+        .content-bg {
+            background-color: #ffffff;
+        }
+        .footer-bg {
+            background-color: #1f2937;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Blok 1: Hlavička a navigácia (Modrá lišta) -->
+    <header class="header-bg text-white shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo/Názov Stránky -->
+            <div class="text-2xl font-bold tracking-tight">
+                Môj Web
+            </div>
+            
+            <!-- Navigácia - PRIDANÁ ZLOŽKA API -->
+            <nav class="hidden md:flex space-x-4">
+                <a href="#domov" class="hover:bg-blue-600 px-3 py-2 rounded-lg transition duration-150">Domov</a>
+                <a href="#o-nas" class="hover:bg-blue-600 px-3 py-2 rounded-lg transition duration-150">O Nás</a>
+                <a href="#api-info" class="bg-blue-700 px-3 py-2 rounded-lg transition duration-150 font-bold">API</a>
+                <a href="#kontakt" class="hover:bg-blue-600 px-3 py-2 rounded-lg transition duration-150">Kontakt</a>
+            </nav>
+
+            <!-- Tlačidlo pre mobilné menu (len vizuálna reprezentácia) -->
+            <button class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Blok 2: Hlavná sekcia/Banner (Svetlé pozadie) -->
+        <section id="domov" class="webnode-block content-bg text-center shadow-md">
+            <div class="max-w-4xl mx-auto px-4">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-4">
+                    Vitajte na Mojej Stránke
+                </h1>
+                <p class="text-xl text-gray-600 mb-8">
+                    Táto stránka bola vytvorená pomocou jednoduchého online editora.
+                </p>
+                <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 transform hover:scale-105">
+                    Prejsť na Produkty
+                </button>
+            </div>
+        </section>
+
+        <!-- Blok 3: Sekcia s API Kľúčom/ID (Tmavé pozadie/Blok s informáciami) -->
+        <section id="api-info" class="webnode-block bg-gray-100 shadow-inner">
+            <div class="max-w-4xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+                    Verejné Informácie a ID
+                </h2>
+                
+                <div class="bg-white border border-red-300 p-6 sm:p-8 rounded-xl shadow-lg w-full max-w-xl mx-auto">
+                    
+                    <!-- Upozornenie o mesačnej zmene -->
+                    <p class="text-base font-semibold text-blue-700 mb-4 p-2 bg-blue-100 rounded-lg">
+                        ⚠️ Upozornenie: Tento kľúč sa mení KAŽDÝ MESIAC. Pre overenie si skontrolujte dátum platnosti.
+                    </p>
+
+                    <p class="text-sm font-medium text-red-600 uppercase mb-3">
+                        DÔLEŽITÉ UPOZORNENIE: ZVEREJNENÝ KĽÚČ
+                    </p>
+                    
+                    <!-- Riadok pre API kľúč, s funkciou kopírovania -->
+                    <div class="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0 sm:space-x-4">
+                        <span class="text-lg font-mono break-all bg-gray-50 p-3 rounded-lg flex-grow text-gray-700 select-all" id="apiKeyDisplay">
+                            7opw82keiei283i09dei
+                        </span>
+                        
+                        <button onclick="copyToClipboard()" class="w-full sm:w-auto flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m-4 3v7m-4-7v7m-4-7v7"></path></svg>
+                            Kopírovať ID
+                        </button>
+                    </div>
+                    
+                    <p class="mt-4 text-sm text-gray-500">
+                        Táto hodnota (ktorú si nazval "API kľúč od WiFi") je teraz verejne zverejnená. Z bezpečnostných dôvodov odporúčame nezverejňovať skutočné heslá ani kľúče.
+                    </p>
+                    <!-- Miesto pre upozornenie po kopírovaní -->
+                    <div id="copyMessage" class="mt-3 text-center text-sm font-medium text-green-700 opacity-0 transition-opacity duration-300">
+                        Skopírované!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blok 4: O Nás/Ďalšie info (Biele pozadie) -->
+        <section id="o-nas" class="webnode-block content-bg shadow-md">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                 <h2 class="text-3xl font-bold text-gray-800 mb-6">
+                    Naše Ciele
+                </h2>
+                <p class="text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                    Zameriavame sa na jednoduchosť a prehľadnosť. Veríme, že webová stránka nemusí byť zložitá, aby bola efektívna. Naša platforma umožňuje komukoľvek rýchlo spustiť vlastný projekt bez potreby kódovania.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Blok 5: Pätička (Tmavá lišta) -->
+    <footer id="kontakt" class="footer-bg text-white py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 Moja Stránka. Všetky práva vyhradené.</p>
+            <p class="text-sm mt-2 text-gray-400">Vytvorené s Láskou a Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Funkcia na kopírovanie textu do schránky
+        function copyToClipboard() {
+            const copyText = document.getElementById("apiKeyDisplay").textContent;
+            
+            // Použijeme document.execCommand('copy') pre lepšiu kompatibilitu v Canvas prostredí
+            const tempInput = document.createElement("input");
+            tempInput.value = copyText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            // Zobrazí správu o skopírovaní
+            const messageElement = document.getElementById("copyMessage");
+            messageElement.textContent = "ID skopírované do schránky!";
+            messageElement.classList.remove('opacity-0');
+            messageElement.classList.add('opacity-100');
+
+            // Skryje správu po 3 sekundách
+            setTimeout(() => {
+                messageElement.classList.remove('opacity-100');
+                messageElement.classList.add('opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
